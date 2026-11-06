@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لغتنامه عربی-فارسی</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:linear-gradient(135deg,#1e1b4b,#7c3aed);--card:#fff;--input:#f8fafc;--hover:#f1f5f9;--text:#1e293b;--muted:#64748b;--inv:#fff;--border:#e2e8f0;--shadow:0 10px 40px -10px rgba(0,0,0,.15);--p:#7c3aed;--pd:#6d28d9;--ok:#10b981;--err:#ef4444;--r:16px;--rs:12px}
+[data-theme=dark]{--bg:linear-gradient(135deg,#0f0a1a,#1e1b4b);--card:#1e293b;--input:#334155;--hover:#2b3a52;--text:#f1f5f9;--muted:#94a3b8;--inv:#f1f5f9;--border:#475569;--shadow:0 10px 40px -10px rgba(0,0,0,.5)}
+body{font-family:Vazirmatn,Tahoma,sans-serif;background:var(--bg);background-attachment:fixed;min-height:100vh;padding:20px;color:var(--text);line-height:1.6}
+.wrap{max-width:900px;margin:0 auto}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--inv);padding:10px 0 22px}
+header h1{font-size:1.6rem;font-weight:800;display:flex;gap:10px;align-items:center}
+header p{opacity:.85;font-size:.95rem}
+.ico-btn{background:rgba(255,255,255,.18);border:0;color:#fff;height:42px;min-width:42px;padding:0 14px;border-radius:50px;cursor:pointer;font:inherit;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.ico-btn:hover{background:rgba(255,255,255,.3)}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:20px;overflow:hidden}
+.ch{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.ch h3{font-size:1.1rem;display:flex;gap:8px;align-items:center}
+.cb{padding:22px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+@media(max-width:600px){.row{grid-template-columns:1fr}}
+label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}
+input{width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:var(--rs);font:inherit;background:var(--input);color:var(--text)}
+input:focus{outline:0;border-color:var(--p);box-shadow:0 0 0 4px rgba(124,58,237,.22)}
+input.ltr{direction:ltr;text-align:left}
+.btn{padding:12px 18px;border:0;border-radius:var(--rs);background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;font:inherit;font-weight:600;cursor:pointer;display:inline-flex;gap:8px;align-items:center;justify-content:center}
+.btn:hover:not(:disabled){filter:brightness(1.1)}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn.full{width:100%;margin-top:14px}
+.btn.sec{background:var(--input);color:var(--text);border:1px solid var(--border)}
+.btn.sm{padding:7px 12px;font-size:.85rem}
+.link{background:none;border:0;color:var(--p);font:inherit;cursor:pointer;margin-top:12px;display:block;text-align:center;width:100%}
+.msg{margin-top:12px;padding:10px 14px;border-radius:10px;font-size:.92rem;display:none}
+.msg.ok{display:block;background:rgba(16,185,129,.15);color:var(--ok)}
+.msg.err{display:block;background:rgba(239,68,68,.15);color:var(--err)}
+.stats{display:flex;gap:14px;flex-wrap:wrap;padding:10px 16px;background:var(--input);border-radius:var(--rs);margin-bottom:14px;font-size:.9rem;color:var(--muted)}
+.stats strong{color:var(--p)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tbox{overflow-x:auto;border:1px solid var(--border);border-radius:var(--rs)}
+table{width:100%;border-collapse:collapse;min-width:460px}
+th{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;padding:12px;text-align:right;font-size:.92rem}
+td{padding:11px 12px;border-bottom:1px solid var(--border)}
+tr:hover td{background:var(--hover)}tr:last-child td{border-bottom:0}
+.ar{font-size:1.25rem;font-weight:700}
+.fa{color:var(--muted)}
+.act{white-space:nowrap;text-align:left}
+.act button{background:none;border:0;cursor:pointer;color:var(--muted);padding:6px;font-size:1rem}
+.act .e:hover{color:var(--p)}.act .d:hover{color:var(--err)}
+.empty{text-align:center;padding:30px;color:var(--muted)}
+.hide{display:none!important}
+#auth{max-width:420px;margin:0 auto}
+dialog{border:0;border-radius:var(--r);padding:22px;width:min(440px,92vw);margin:auto;background:var(--card);color:var(--text);box-shadow:var(--shadow)}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+dialog .btns{display:flex;gap:10px;margin-top:16px}
+.warn{font-size:.85rem;color:var(--muted);margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div><h1><i class="fas fa-book-open"></i> لغتنامه عربی-فارسی</h1><p>دفتر لغات شخصی شما</p></div>
+  <div style="display:flex;gap:8px">
+    <button class="ico-btn hide" id="logout"><i class="fas fa-right-from-bracket"></i> خروج</button>
+    <button class="ico-btn" id="theme" aria-label="تغییر تم"><i class="fas fa-moon"></i></button>
+  </div>
+</header>
+
+<!-- ورود / ثبت‌نام -->
+<section id="auth" class="card hide">
+  <div class="ch"><h3 id="auth-title"><i class="fas fa-lock"></i> ورود</h3></div>
+  <div class="cb">
+    <form id="auth-form">
+      <label for="id">ایمیل یا نام کاربری</label>
+      <input id="id" class="ltr" autocomplete="username" required>
+      <label for="pw" style="margin-top:12px">رمز عبور</label>
+      <input id="pw" type="password" class="ltr" autocomplete="current-password" minlength="6" required>
+      <button class="btn full" id="auth-btn"><i class="fas fa-right-to-bracket"></i> <span>ورود</span></button>
+    </form>
+    <button class="link" id="switch">حساب ندارید؟ ثبت‌نام کنید</button>
+    <button class="link" id="reset" style="margin-top:4px;color:var(--muted)">فراموشی رمز (فقط با ایمیل)</button>
+    <div class="msg" id="auth-msg"></div>
+    <p class="warn">رمز دست‌کم ۶ نویسه باشد. لغات هر کاربر جدا و خصوصی ذخیره می‌شود.</p>
+  </div>
+</section>
+
+<!-- برنامه -->
+<main id="app" class="hide">
+  <div class="card">
+    <div class="ch"><h3><i class="fas fa-plus-circle"></i> ثبت لغت جدید</h3><small id="who"></small></div>
+    <div class="cb">
+      <form id="add-form">
+        <div class="row">
+          <div><label for="ar">📝 لغت عربی</label><input id="ar" placeholder="مثال: كِتَاب" required maxlength="80"></div>
+          <div><label for="fa">📖 معنی فارسی</label><input id="fa" placeholder="مثال: کتاب" required maxlength="200"></div>
+        </div>
+        <button class="btn full" id="add-btn"><i class="fas fa-save"></i> ذخیره</button>
+      </form>
+      <div class="msg" id="msg"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><h3><i class="fas fa-list"></i> لغات من</h3></div>
+    <div class="cb">
+      <div class="stats"><span>مجموع: <strong id="total">۰</strong></span><span>نمایش: <strong id="shown">۰</strong></span></div>
+      <div class="tools">
+        <input id="search" placeholder="جستجو در لغات یا معانی..." style="flex:1;min-width:180px">
+        <button class="btn sec sm" id="x-xlsx"><i class="fas fa-file-excel"></i> خروجی Excel</button>
+        <button class="btn sec sm" id="x-csv"><i class="fas fa-file-csv"></i> خروجی CSV</button>
+        <button class="btn sec sm" id="imp"><i class="fas fa-file-import"></i> وارد کردن CSV</button>
+        <input type="file" id="file" accept=".csv,text/csv" class="hide">
+      </div>
+      <div class="tbox"><table>
+        <thead><tr><th style="width:50px">#</th><th>لغت عربی</th><th>معنی فارسی</th><th style="width:90px"></th></tr></thead>
+        <tbody id="body"></tbody>
+      </table></div>
+      <div class="empty hide" id="empty"><i class="fas fa-inbox" style="font-size:2rem;display:block;margin-bottom:8px"></i>هنوز لغتی ثبت نشده است.</div>
+    </div>
+  </div>
+</main>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog" id="edit-form">
+    <label for="e-ar">لغت عربی</label><input id="e-ar" required maxlength="80">
+    <label for="e-fa" style="margin-top:12px">معنی فارسی</label><input id="e-fa" required maxlength="200">
+    <div class="btns"><button class="btn" style="flex:1">ذخیره</button><button type="button" class="btn sec" id="e-cancel">انصراف</button></div>
+  </form>
+</dialog>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,createUserWithEmailAndPassword,signOut,sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {initializeFirestore,persistentLocalCache,collection,addDoc,deleteDoc,updateDoc,doc,onSnapshot,query,orderBy,serverTimestamp,writeBatch} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+/* ====== تنظیمات Firebase ====== */
+const firebaseConfig = {
+  apiKey: "AIzaSyBgQ3p8wjpDMqdC8Ztun5N4bHVzVlstVX0",
+  authDomain: "vocab-a29ca.firebaseapp.com",
+  projectId: "vocab-a29ca",
+  storageBucket: "vocab-a29ca.firebasestorage.app",
+  messagingSenderId: "1083932983720",
+  appId: "1:1083932983720:web:a78931c50a1d74973c5d9d"
+};
+/* ================================================================== */
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = initializeFirestore(app, {localCache: persistentLocalCache()});
+const $ = id => document.getElementById(id);
+const fmt = n => n.toLocaleString('fa-IR');
+const FAKE = '@lughat.app';   // برای ورود با نام کاربری
+let user = null, words = [], unsub = null, mode = 'login';
+
+/* ---------- ابزارها ---------- */
+const norm = s => (s||'').replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[\u064B-\u065F\u0670\u0640]/g,'').trim().toLowerCase();
+function flash(el, text, type, ms=3500){ el.textContent=text; el.className='msg '+type; if(ms) setTimeout(()=>{ if(el.textContent===text) el.className='msg'; }, ms); }
+const errFa = e => ({
+  'auth/invalid-credential':'ایمیل/نام کاربری یا رمز اشتباه است.',
+  'auth/invalid-email':'ایمیل یا نام کاربری معتبر نیست.',
+  'auth/email-already-in-use':'این حساب قبلاً ساخته شده است.',
+  'auth/weak-password':'رمز باید حداقل ۶ نویسه باشد.',
+  'auth/too-many-requests':'تلاش‌های زیاد. کمی بعد دوباره امتحان کنید.',
+  'auth/network-request-failed':'اتصال اینترنت را بررسی کنید.',
+  'auth/missing-email':'ایمیل را وارد کنید.',
+  'permission-denied':'اجازه دسترسی ندارید (قوانین Firestore را بررسی کنید).'
+}[e.code] || 'خطا: ' + (e.code || e.message));
+const toEmail = v => { v=v.trim(); return v.includes('@') ? v : v.toLowerCase()+FAKE; };
+
+/* ---------- تم ---------- */
+function setTheme(t){ document.documentElement.dataset.theme=t; $('theme').innerHTML=`<i class="fas fa-${t==='dark'?'sun':'moon'}"></i>`; try{localStorage.setItem('theme',t)}catch{} }
+let saved=null; try{saved=localStorage.getItem('theme')}catch{}
+setTheme(saved || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+$('theme').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
+
+/* ---------- احراز هویت ---------- */
+function setMode(m){
+  mode=m; const reg=m==='register';
+  $('auth-title').innerHTML=`<i class="fas fa-${reg?'user-plus':'lock'}"></i> ${reg?'ثبت‌نام':'ورود'}`;
+  $('auth-btn').querySelector('span').textContent=reg?'ساخت حساب':'ورود';
+  $('switch').textContent=reg?'حساب دارید؟ وارد شوید':'حساب ندارید؟ ثبت‌نام کنید';
+  $('pw').autocomplete=reg?'new-password':'current-password';
+  $('auth-msg').className='msg';
+}
+$('switch').onclick=()=>setMode(mode==='login'?'register':'login');
+$('auth-form').onsubmit=async e=>{
+  e.preventDefault(); const b=$('auth-btn'); b.disabled=true;
+  try{
+    const email=toEmail($('id').value), pw=$('pw').value;
+    if(mode==='register') await createUserWithEmailAndPassword(auth,email,pw);
+    else await signInWithEmailAndPassword(auth,email,pw);
+  }catch(err){ flash($('auth-msg'),errFa(err),'err',0); }
+  b.disabled=false;
+};
+$('reset').onclick=async()=>{
+  const v=$('id').value.trim();
+  if(!v.includes('@')) return flash($('auth-msg'),'برای بازیابی رمز، ایمیل خود را در کادر بنویسید.','err');
+  try{ await sendPasswordResetEmail(auth,v); flash($('auth-msg'),'لینک بازیابی به ایمیل ارسال شد.','ok'); }
+  catch(err){ flash($('auth-msg'),errFa(err),'err'); }
+};
+$('logout').onclick=()=>signOut(auth);
+
+onAuthStateChanged(auth,u=>{
+  user=u; if(unsub){unsub();unsub=null;} words=[];
+  $('auth').classList.toggle('hide',!!u);
+  $('app').classList.toggle('hide',!u);
+  $('logout').classList.toggle('hide',!u);
+  if(!u){ render(); return; }
+  $('who').textContent=u.email.endsWith(FAKE)?u.email.replace(FAKE,''):u.email;
+  const q=query(collection(db,'users',u.uid,'words'),orderBy('createdAt','desc'));
+  unsub=onSnapshot(q,snap=>{
+    words=snap.docs.map(d=>({id:d.id,...d.data()}));
+    render();
+  },err=>flash($('msg'),errFa(err),'err',0));
+});
+
+/* ---------- نمایش ---------- */
+function render(){
+  const t=norm($('search').value);
+  const list=words.filter(w=>!t||norm(w.ar).includes(t)||norm(w.fa).includes(t));
+  const body=$('body'); body.innerHTML='';
+  list.forEach((w,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><b style="color:var(--p)"></b></td><td><span class="ar"></span></td><td><span class="fa"></span></td>
+      <td class="act"><button class="e" title="ویرایش"><i class="fas fa-pen"></i></button><button class="d" title="حذف"><i class="fas fa-trash"></i></button></td>`;
+    tr.querySelector('b').textContent=fmt(i+1);
+    tr.querySelector('.ar').textContent=w.ar;
+    tr.querySelector('.fa').textContent=w.fa;
+    tr.querySelector('.e').onclick=()=>openEdit(w);
+    tr.querySelector('.d').onclick=()=>remove(w);
+    body.appendChild(tr);
+  });
+  $('empty').classList.toggle('hide',list.length>0);
+  $('total').textContent=fmt(words.length); $('shown').textContent=fmt(list.length);
+}
+let st; $('search').oninput=()=>{clearTimeout(st); st=setTimeout(render,200);};
+
+/* ---------- افزودن / ویرایش / حذف ---------- */
+const col=()=>collection(db,'users',user.uid,'words');
+$('add-form').onsubmit=async e=>{
+  e.preventDefault();
+  const ar=$('ar').value.trim(), fa=$('fa').value.trim(); if(!ar||!fa) return;
+  if(words.some(w=>norm(w.ar)===norm(ar)&&norm(w.fa)===norm(fa))) return flash($('msg'),'این لغت با همین معنی قبلاً ثبت شده است.','err');
+  const b=$('add-btn'); b.disabled=true;
+  try{ await addDoc(col(),{ar,fa,createdAt:serverTimestamp()}); e.target.reset(); $('ar').focus(); flash($('msg'),'✅ ذخیره شد.','ok'); }
+  catch(err){ flash($('msg'),errFa(err),'err'); }
+  b.disabled=false;
+};
+let editing=null;
+function openEdit(w){ editing=w; $('e-ar').value=w.ar; $('e-fa').value=w.fa; $('dlg').showModal(); }
+$('e-cancel').onclick=()=>$('dlg').close();
+$('edit-form').onsubmit=async()=>{
+  const ar=$('e-ar').value.trim(), fa=$('e-fa').value.trim(); if(!ar||!fa||!editing) return;
+  try{ await updateDoc(doc(db,'users',user.uid,'words',editing.id),{ar,fa}); }
+  catch(err){ flash($('msg'),errFa(err),'err'); }
+};
+async function remove(w){
+  if(!confirm(`لغت «${w.ar}» حذف شود؟`)) return;
+  try{ await deleteDoc(doc(db,'users',user.uid,'words',w.id)); }catch(err){ flash($('msg'),errFa(err),'err'); }
+}
+
+/* ---------- خروجی ---------- */
+const stamp=()=>new Date().toISOString().slice(0,10);
+const rows=()=>words.slice().reverse().map(w=>[w.ar,w.fa]);   // قدیمی‌ترین اول
+function download(blob,name){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); }
+$('x-csv').onclick=()=>{
+  if(!words.length) return flash($('msg'),'لغتی برای خروجی نیست.','err');
+  const esc=s=>`"${String(s).replace(/"/g,'""')}"`;
+  const csv='\uFEFF'+[['Arabic','Persian'],...rows()].map(r=>r.map(esc).join(',')).join('\r\n');
+  download(new Blob([csv],{type:'text/csv;charset=utf-8'}),`lughat-${stamp()}.csv`);
+};
+$('x-xlsx').onclick=()=>{
+  if(!words.length) return flash($('msg'),'لغتی برای خروجی نیست.','err');
+  if(!window.XLSX) return flash($('msg'),'کتابخانه Excel بارگذاری نشد؛ از خروجی CSV استفاده کنید.','err');
+  const ws=XLSX.utils.aoa_to_sheet([['لغت عربی','معنی فارسی'],...rows()]);
+  ws['!cols']=[{wch:28},{wch:40}];
+  const wb=XLSX.utils.book_new(); wb.Workbook={Views:[{RTL:true}]};
+  XLSX.utils.book_append_sheet(wb,ws,'لغات');
+  XLSX.writeFile(wb,`lughat-${stamp()}.xlsx`);
+};
+
+/* ---------- ورود از CSV ---------- */
+function parseCSV(t){
+  t=t.replace(/^\uFEFF/,''); const out=[]; let r=[],f='',q=false;
+  for(let i=0;i<t.length;i++){const c=t[i];
+    if(q){ if(c==='"'){ if(t[i+1]==='"'){f+='"';i++} else q=false } else f+=c }
+    else if(c==='"') q=true;
+    else if(c===','){ r.push(f); f=''; }
+    else if(c==='\n'||c==='\r'){ if(c==='\r'&&t[i+1]==='\n') i++; r.push(f); out.push(r); r=[]; f=''; }
+    else f+=c;
+  }
+  if(f||r.length){ r.push(f); out.push(r); }
+  return out.map(r=>r.map(x=>x.trim())).filter(r=>r[0]&&r[1]);
+}
+$('imp').onclick=()=>$('file').click();
+$('file').onchange=async e=>{
+  const file=e.target.files[0]; e.target.value=''; if(!file) return;
+  try{
+    let data=parseCSV(await file.text());
+    if(data.length&&/arabic|لغت|عرب/i.test(data[0][0])) data.shift();
+    const have=new Set(words.map(w=>norm(w.ar)+'|'+norm(w.fa)));
+    data=data.filter(r=>{const k=norm(r[0])+'|'+norm(r[1]); if(have.has(k)) return false; have.add(k); return true;});
+    if(!data.length) return flash($('msg'),'لغت جدیدی برای وارد کردن پیدا نشد.','err');
+    const base=Date.now();
+    for(let i=0;i<data.length;i+=400){
+      const batch=writeBatch(db);
+      data.slice(i,i+400).forEach((r,j)=>batch.set(doc(col()),{ar:r[0].slice(0,80),fa:r[1].slice(0,200),createdAt:new Date(base+i+j)}));
+      await batch.commit();
+    }
+    flash($('msg'),`✅ ${fmt(data.length)} لغت وارد شد.`,'ok');
+  }catch(err){ flash($('msg'),errFa(err),'err'); }
+};
+
+setMode('login'); render();
+</script>
+</body>
+</html>
